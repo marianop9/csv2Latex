@@ -23,8 +23,8 @@ def getLabelPositions(lines: list[str], label: str,
 template = """
 \\begin{{table}}
     \\centering
-    \\label{{tab:Tabla}}
     \\caption{{Tabla de ejemplo}}
+    \\label{{tab:Tabla}}
     \\begin{{tabular}}{{{layout}}}
         {headerText}
         \\hline
