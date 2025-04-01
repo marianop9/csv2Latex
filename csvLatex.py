@@ -1,5 +1,4 @@
-import pyperclip
-
+import sys
 
 def getLabelPositions(lines: list[str], label: str,
                       separator: str) -> dict[int, list[int]]:
@@ -38,12 +37,12 @@ def parseCsv(input: str, delim=';', tableLabel='_tabla'):
 
     if delim not in input:
         raise ValueError(
-            f'No se encontro el delimitador "{delim}" en la ultima entrada del clipboard'
+            f'No se encontro el delimitador "{delim}" en los contenidos del archivo csv'
         )
 
     if tableLabel not in input:
         raise ValueError(
-            f'No se encontro marcador "{tableLabel}" en la ultima entrada del clipboard'
+            f'No se encontro marcador "{tableLabel}" en los contenidos del archivo csv'
         )
 
     lines = input.splitlines()
@@ -96,39 +95,16 @@ def parseCsv(input: str, delim=';', tableLabel='_tabla'):
                                      bodyText=bodyText)
             print(output)
 
-    # for line in lines[1:]:
-    #     lineCols = line.split(delim)
+if len(sys.argv) != 2:
+    print('missing csv path')
+    sys.exit()
 
-    #     body.append(lineCols[start_idx:end_idx])
+path = sys.argv[1]
 
-    # parsedLines = [' & '.join(line) for line in body]
-    # bodyText = ' \\\\ \n\t'.join(parsedLines)
+try:
+    input = open(path).read()
+except FileNotFoundError:
+    print('file not found')
+    sys.exit()
 
-    # layout = 'c|c'
-    # headerText = 'Columna 1 & Columna 2 \\\\'
-    # bodyText = 'Elemento 1 & Elemento 2 \\\\' + '\n' + '\tElemento 3 & Elemento 4'
-
-
-#     template = """
-# \\begin{{table}}
-#     \\centering
-#     \\label{{tab:Tabla}}
-#     \\caption{{Tabla de ejemplo}}
-#     \\begin{{tabular}}{{{layout}}}
-#         {headerText}
-#         \\hline
-#         {bodyText}
-#     \\end{{tabular}}
-# \\end{{table}}
-#     """
-
-#     output = template.format(layout=tableLayout,
-#                              headerText=headerText,
-#                              bodyText=bodyText)
-
-#     pyperclip.copy(output)
-#     print(output)
-#     print("\ntabla copiada al clipboard!")
-
-input = pyperclip.paste()
 parseCsv(input)
