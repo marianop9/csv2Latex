@@ -1,5 +1,5 @@
-# csvLatex
-Convierte una o más tablas exportadas de una hoja de calculo (.xls, .ods, etc.) a tablas de latex.
+# csv2Latex
+Convierte una o más tablas exportadas de una hoja de calculo (.xls, .ods, etc.) a tablas de $\LaTeX$.
 
 Cada tabla debe tener un marcador `_tabla` en la celda anterior a la primer cabecera, y el archivo csv se debe exportar con el delimitador `;`.
 
